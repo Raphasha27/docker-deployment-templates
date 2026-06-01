@@ -9,5 +9,6 @@ WORKDIR /app
 COPY --from=base /app/node_modules ./node_modules
 COPY . .
 EXPOSE 4000
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD wget -q -O /dev/null http://localhost:4000/ || exit 1
 USER appuser
 CMD ["node", "server.js"]
