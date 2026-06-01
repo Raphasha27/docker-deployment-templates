@@ -1,52 +1,63 @@
-# docker-deployment-templates
-### Production-Grade Enterprise Platform
+# Docker Deployment Templates
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
-![Build](https://github.com/Raphasha27/docker-deployment-templates/actions/workflows/ci.yml/badge.svg?style=flat-square)
-![Stars](https://img.shields.io/github/stars/Raphasha27/docker-deployment-templates?style=social)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
----
+A collection of production-ready Docker Compose templates for common application stacks. Each template includes a `docker-compose.yml` and any supporting config files (Dockerfiles, nginx configs, etc.).
 
-## 🚀 Key Features
-- **🧱 Domain-Driven Architecture**: Structured to maximize microservice clarity and separation of concerns.
-- **🛡️ Secure Scaffolding**: Built-in Zero-Trust guidelines, dependency scanners, and security workflows.
-- **⚡ CI/CD Integrated**: Complete linting, code parsing, and building checks configured dynamically.
+## Templates
 
----
+| Template | Stack | Services |
+|---|---|---|
+| `fastapi-postgres` | FastAPI + PostgreSQL | `tiangolo/uvicorn-gunicorn-fastapi`, `postgres:15` |
+| `node-mongo` | Node.js + MongoDB | Custom Node Dockerfile, `mongo:7` with persistent volume |
+| `nextjs` | Next.js (multi-stage) | Multi-stage Docker build for production Next.js |
+| `nginx-reverse-proxy` | Nginx reverse proxy | `nginx:alpine` with custom config and SSL mount |
+| `redis` | Redis standalone | `redis:7-alpine` with AOF persistence and volume |
 
-## 🏗️ Architecture Design
-- **API Gateways**: Manages client entry interfaces and authentication relays.
-- **Services Layer**: Domain execution logic representing core system requirements.
-- **Persistence DB**: ACID-compliant databasing patterns.
-- **DevOps Core**: Containerized deployment blueprints.
+## Usage
 
----
+```bash
+# Pick a template
+cd templates/fastapi-postgres
 
-## 🛠️ Technology Stack
-- **Primary Backend**: To be specified
-- **Frontend Layer**: Web UI elements
-- **DevOps Blueprint**: Docker & GitHub Actions CI
+# Start services
+docker compose up -d
 
----
+# Stop
+docker compose down
+```
 
-## 📦 Scaffolding & Setup
+Each template's `docker-compose.yml` is self-contained. Customize environment variables, ports, and volume mounts as needed.
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Raphasha27/docker-deployment-templates.git
-   cd docker-deployment-templates
-   ```
+## Project Structure
 
-2. **Configure Environment variables**:
-   ```bash
-   cp .env.example .env
-   ```
+```
+docker-deployment-templates/
+├── templates/
+│   ├── fastapi-postgres/     # FastAPI + PostgreSQL
+│   │   ├── docker-compose.yml
+│   │   └── .gitkeep
+│   ├── node-mongo/          # Node.js + MongoDB
+│   │   ├── Dockerfile
+│   │   ├── docker-compose.yml
+│   │   └── .gitkeep
+│   ├── nextjs/              # Next.js multi-stage
+│   │   ├── Dockerfile
+│   │   ├── docker-compose.yml
+│   │   └── .gitkeep
+│   ├── nginx-reverse-proxy/ # Nginx reverse proxy
+│   │   ├── nginx.conf
+│   │   ├── docker-compose.yml
+│   │   └── .gitkeep
+│   └── redis/               # Redis standalone
+│       ├── docker-compose.yml
+│       └── .gitkeep
+├── assets/
+├── .github/workflows/
+└── README.md
+```
 
-3. **Deploy using Docker**:
-   ```bash
-   docker compose up --build
-   ```
+## License
 
----
-
-© 2026 **Kirov Dynamics Technology** | Developed by **Raphasha27**
+MIT — see [LICENSE](./LICENSE).
